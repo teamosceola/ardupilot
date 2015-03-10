@@ -217,7 +217,7 @@ void AC_PosControl::init_takeoff()
 // is_active_z - returns true if the z-axis position controller has been run very recently
 bool AC_PosControl::is_active_z() const
 {
-    return ((hal.scheduler->millis() - _last_update_z_ms) <= POSCONTROL_ACTIVE_TIMEOUT_MS);
+    return ((hal.scheduler->millis() - _last_update_z_ms) <= POSCONTROL_ACTIVE_TIMEOUT_SEC);
 }
 
 /// update_z_controller - fly to altitude in cm above home
@@ -225,7 +225,7 @@ void AC_PosControl::update_z_controller()
 {
     // check time since last cast
     uint32_t now = hal.scheduler->millis();
-    if (now - _last_update_z_ms > POSCONTROL_ACTIVE_TIMEOUT_MS) {
+    if (now - _last_update_z_ms > POSCONTROL_ACTIVE_TIMEOUT_SEC) {
         _flags.reset_rate_to_accel_z = true;
         _flags.reset_accel_to_throttle = true;
     }
@@ -497,7 +497,7 @@ float AC_PosControl::get_distance_to_target() const
 // is_active_xy - returns true if the xy position controller has been run very recently
 bool AC_PosControl::is_active_xy() const
 {
-    return ((hal.scheduler->millis() - _last_update_xy_ms) <= POSCONTROL_ACTIVE_TIMEOUT_MS);
+    return ((hal.scheduler->millis() - _last_update_xy_ms) <= POSCONTROL_ACTIVE_TIMEOUT_SEC);
 }
 
 /// init_xy_controller - initialise the xy controller
